@@ -34,30 +34,33 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Feld", view.getTag().toString());
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
-
-        //Prüfung, ob Feld schon belegt ist, um nicht mehrfach auswählbar zu sein
-        if (gameState[tappedCounter]==2 && gameActive) {
-            Log.i("gameActive1", String.valueOf(gameActive));
-            animation(counter, activePlayer);
-            Log.i("gameStateBefore", Arrays.toString(gameState));
-            gameState[tappedCounter] = activePlayer;
-
-            //wenn Player1 aktiv ist, setze rot, sonst gelb
-            if (activePlayer == 1) {
+        if (gameActive) {
+            //Prüfung, ob Feld schon belegt ist, um nicht mehrfach auswählbar zu sein
+            if (gameState[tappedCounter] == 2) {
+                Log.i("gameActive1", String.valueOf(gameActive));
                 animation(counter, activePlayer);
-                Log.i("gameStateAfter", Arrays.toString(gameState));
-                activePlayer = 0;
+                Log.i("gameStateBefore", Arrays.toString(gameState));
+                gameState[tappedCounter] = activePlayer;
+
+                //wenn Player1 aktiv ist, setze rot, sonst gelb
+                if (activePlayer == 1) {
+                    animation(counter, activePlayer);
+                    Log.i("gameStateAfter", Arrays.toString(gameState));
+                    activePlayer = 0;
+
+                } else {
+
+                    counter.setImageResource(R.drawable.yellow);
+                    Log.i("gameStateAfter:", Arrays.toString(gameState));
+                    activePlayer = 1;
+
+                }
 
             } else {
-
-                counter.setImageResource(R.drawable.yellow);
-                Log.i("gameStateAfter:", Arrays.toString(gameState));
-                activePlayer = 1;
-
+                Toast.makeText(this, "Feld bereits belegt", Toast.LENGTH_SHORT).show();
             }
-
         } else {
-            Toast.makeText(this, "Feld bereits belegt", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Das Spiel ist bereits beendet", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -89,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 playAgainButton.setVisibility(View.VISIBLE);
 
                 Log.i("gameActive2:", String.valueOf(gameActive));
+
+                return;
 
 
              } else {
