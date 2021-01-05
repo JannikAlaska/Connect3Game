@@ -31,21 +31,21 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
 
         //der Tag beschreibt, an welcher Position wir uns befinden (0-8)
-        Log.i("Feld:", view.getTag().toString());
+        Log.i("Feld", view.getTag().toString());
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
 
         //Prüfung, ob Feld schon belegt ist, um nicht mehrfach auswählbar zu sein
         if (gameState[tappedCounter]==2 && gameActive) {
-            Log.i("gameActive1:", String.valueOf(gameActive));
+            Log.i("gameActive1", String.valueOf(gameActive));
             animation(counter, activePlayer);
-            Log.i("gameStateBefore:", Arrays.toString(gameState));
+            Log.i("gameStateBefore", Arrays.toString(gameState));
             gameState[tappedCounter] = activePlayer;
 
             //wenn Player1 aktiv ist, setze rot, sonst gelb
             if (activePlayer == 1) {
                 animation(counter, activePlayer);
-                Log.i("gameStateAfter:", Arrays.toString(gameState));
+                Log.i("gameStateAfter", Arrays.toString(gameState));
                 activePlayer = 0;
 
             } else {
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int[] winningPosition: winningPositions){
             if (gameState[winningPosition[0]] == gameState[winningPosition[1]] && gameState[winningPosition[1]] == gameState[winningPosition[2]] && gameState[winningPosition[0]] != 2){
+                Log.i("INFO", "WIN");
                 String winner = "";
 
                 if (activePlayer == 1) {
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 
              } else {
-
+                Log.i("INFO", "else branch started");
                 gameActive = false;
 
                 for (int counterState: gameState){
