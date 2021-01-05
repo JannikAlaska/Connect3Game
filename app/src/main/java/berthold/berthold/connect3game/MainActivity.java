@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     boolean gameActive = true;
 
+    Button playAgainButton;
+    TextView winnerTextView;
+
+
     public void dropIn (View view) {
 
         //ImageView "counter" erstellen und mit dem in der dropIn übergebenen View initialisieren
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Prüfung, ob Feld schon belegt ist, um nicht mehrfach auswählbar zu sein
         if (gameState[tappedCounter]==2 && gameActive) {
+            Log.i("gameActive1:", String.valueOf(gameActive));
             animation(counter, activePlayer);
             Log.i("gameStateBefore:", Arrays.toString(gameState));
             gameState[tappedCounter] = activePlayer;
@@ -75,7 +82,30 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Der Gewinner ist " + winner , Toast.LENGTH_SHORT).show();
 
-             }
+                winnerTextView.setText(winner + " hat gewonnen.");
+
+                winnerTextView.setVisibility(View.VISIBLE);
+                playAgainButton.setVisibility(View.VISIBLE);
+
+                Log.i("gameActive2:", String.valueOf(gameActive));
+
+
+             } else {
+
+                gameActive = false;
+
+                for (int counterState: gameState){
+                    if (counterState == 2) gameActive = true;
+                }
+
+                if (!gameActive){
+                    winnerTextView.setText("Unentschieden");
+
+                    winnerTextView.setVisibility(View.VISIBLE);
+                    playAgainButton.setVisibility(View.VISIBLE);
+                }
+
+            }
         }
     }
 
@@ -90,11 +120,36 @@ public class MainActivity extends AppCompatActivity {
         //"Herunterfallen" des Spielsteins animieren
         counter.setTranslationY(-1500);
         counter.animate().translationYBy(1500).setDuration(100);
+        }
+
+
+    public void playAgain(View view){
+
+        winnerTextView.setVisibility(View.INVISIBLE);
+        playAgainButton.setVisibility(View.INVISIBLE);
+
+        GridLayout gridLayout = findViewById(R.id.gridLayout);
+
+        for (int i = 0; i<gridLayout.getChildCount(); i++) {
+            ImageView counter = (ImageView) gridLayout.getChildAt(i);
+            counter.setImageDrawable(null);
+            gameState[i]=2;
+        }
+
+        activePlayer = 1;
+        gameActive = true;
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        playAgainButton  = findViewById(R.id.playAgainButton);
+        winnerTextView  = findViewById(R.id.winnerTextView);
+
+
     }
 }
