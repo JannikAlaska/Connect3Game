@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Connect3Game.iml" filepath="$PROJECT_DIR$/.idea/Connect3Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Connect3Game.iml" filepath="$PROJECT_DIR$/Connect3Game.iml" />
       <module fileurl="file://C:\Users\Jannik1\AndroidStudioProjects\Connect3Game\Connect3Game.iml" filepath="C:\Users\Jannik1\AndroidStudioProjects\Connect3Game\Connect3Game.iml" />
+      <module fileurl="file://C:\Users\berthold\AndroidStudioProjects\Connect3Game\.idea\Connect3Game.iml" filepath="C:\Users\berthold\AndroidStudioProjects\Connect3Game\.idea\Connect3Game.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\Jannik1\AndroidStudioProjects\Connect3Game\app\app.iml" filepath="C:\Users\Jannik1\AndroidStudioProjects\Connect3Game\app\app.iml" />
     </modules>
